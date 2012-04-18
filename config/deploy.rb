@@ -26,7 +26,9 @@ namespace :deploy do
   task :setup, :except => { :no_release => true } do
     run "rm -rf #{current_path}"
     run "git clone #{repository} #{current_path}"
-    run "mkdir #{current_path}/log"
+    run "mkdir -p #{current_path}/log"
+    run "mkdir -p #{shared_path}/tmp/pids"
+    run "mkdir -p #{shared_path}/tmp/sockets"
     run "chmod +w #{current_path}/log"
   end
   
