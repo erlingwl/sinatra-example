@@ -8,7 +8,7 @@ set :deploy_via, :remote_cache
 ssh_options[:forward_agent] = true
 default_run_options[:pty] = true
 
-set :branch, "master"
+set :branch, "origin/chef"
 set :user, 'ubuntu'
 
 role :web, ENV["WEBSERVER"]
