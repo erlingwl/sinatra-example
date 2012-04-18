@@ -49,7 +49,7 @@ namespace :deploy do
   
   desc "Symlink"
   task :symlink, :except => { :no_release => true } do
-    run "ls -s #{current_path}/config/default /etc/nginx/sites-available/default"
+    sudo "ln -sf #{current_path}/config/default /etc/nginx/sites-enabled/default"
   end
 end
 
