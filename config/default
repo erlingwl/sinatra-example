@@ -1,0 +1,15 @@
+upstream app_server {
+	server unix:/var/www/demo/shared/tmp/sockets/unicorn.sock;
+}
+
+server {
+  listen 80 default;
+	server_name *.demo.no demo.no;
+	server_name_in_redirect on;
+  access_log  /var/log/nginx/access.log;
+
+	location / { 
+		proxy_pass http://app_server;
+		proxy_set_header Host $http_host;
+	}
+}
