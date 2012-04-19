@@ -94,6 +94,22 @@ namespace :nginx do
   task :restart, :roles => :app, :except => { :no_release => true } do
     sudo "/etc/init.d/nginx restart"
   end
+  
+  desc "stop nginx"
+  task :stop, :roles => :app, :except => { :no_release => true } do
+    sudo "/etc/init.d/nginx stop"
+  end
+  
+  desc "start nginx"
+  task :start, :roles => :app, :except => { :no_release => true } do
+    sudo "/etc/init.d/nginx start"
+  end
+  
+  desc "nginx status"
+  task :status, :roles => :app, :except => { :no_release => true } do
+    sudo "/etc/init.d/nginx status"
+  end
+  
   desc "tail logs"
   task :tail, :roles => :app do
     run "tail -100f /var/log/nginx/access.log"
