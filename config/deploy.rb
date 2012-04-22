@@ -19,6 +19,7 @@ namespace :deploy do
   task :default do
     update
     bundle
+    symlink
     restart
   end
 
@@ -46,6 +47,11 @@ namespace :deploy do
   desc "Update the deployed code."
   task :update_code, :except => { :no_release => true } do
     run "cd #{current_path}; git pull; git reset --hard #{branch}"
+  end
+  
+  desc "Create symlink"
+  task :create_symlink, :except => { :no_release => true } do
+    # do nothing..
   end
   
   desc "Symlink"
