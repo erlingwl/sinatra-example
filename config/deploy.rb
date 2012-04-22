@@ -1,5 +1,5 @@
 set :application, "demo"
-set :repository,  "git@github.com:erlingwl/sinatra-example.git"
+set :repository,  "git://github.com/erlingwl/sinatra-example.git"
 set :deploy_to, "/var/www/#{application}"
 
 set :scm, :git
@@ -26,6 +26,7 @@ namespace :deploy do
   task :setup, :except => { :no_release => true } do
     run "rm -rf #{current_path}"
     run "git clone #{repository} #{current_path}"
+    run "cd #{current_path}; git checkout -b chef #{branch}"
     run "mkdir -p #{current_path}/log"
     run "mkdir -p #{shared_path}/tmp/pids"
     run "mkdir -p #{shared_path}/tmp/sockets"
@@ -51,6 +52,7 @@ namespace :deploy do
   task :symlink, :except => { :no_release => true } do
     sudo "ln -sf #{current_path}/config/default /etc/nginx/sites-enabled/default"
   end
+  
 end
 
 set :unicorn_pid, "#{shared_path}/tmp/pids/unicorn.pid"
